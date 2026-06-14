@@ -1,6 +1,8 @@
 # Dashboard de Requisições FY26
 
-🔗 **Dashboard publicado:** https://dashboard-requisicoes-atualizado-d59e46.code.siemens-energy.io/
+🔗 **Dashboard publicado (GitLab Pages):** https://dashboard-requisicoes-atualizado-d59e46.code.siemens-energy.io/
+
+🔗 **Dashboard publicado (GitHub Pages):** https://victorromao011.github.io/dashboard-requisicoes/
 
 Dashboard que lê os dados **dinamicamente** do arquivo `dados.xlsx` no mesmo diretório, usando [SheetJS](https://sheetjs.com/). Os dados **não** estão mais embutidos no HTML — para atualizar o dashboard, basta substituir o `dados.xlsx` e recarregar a página.
 
@@ -23,9 +25,14 @@ Dashboard que lê os dados **dinamicamente** do arquivo `dados.xlsx` no mesmo di
 8. Aguarde ~1-2 minutos: o pipeline (**Build → Pipelines**) roda automaticamente e republica o GitLab Pages.
 9. Acesse o link do dashboard e recarregue com **Ctrl+F5** (para ignorar o cache) — os novos dados devem aparecer.
 
-## Como publicar (GitLab Pages)
+## Como publicar (GitLab Pages e GitHub Pages)
 
-A publicação já está configurada via [`.gitlab-ci.yml`](.gitlab-ci.yml): a cada push na branch `main`, o job `pages` copia `index.html` e `dados.xlsx` para `public/` e o GitLab publica automaticamente em https://dashboard-requisicoes-atualizado-d59e46.code.siemens-energy.io/.
+A publicação roda em paralelo nas duas plataformas, a cada push na branch `main`:
+
+- **GitLab Pages**: configurado via [`.gitlab-ci.yml`](.gitlab-ci.yml) — o job `pages` copia os arquivos para `public/` e publica em https://dashboard-requisicoes-atualizado-d59e46.code.siemens-energy.io/.
+- **GitHub Pages**: configurado via [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) — o workflow copia os arquivos para `public/` e publica em https://victorromao011.github.io/dashboard-requisicoes/.
+
+> Na primeira execução, pode ser necessário habilitar manualmente em **Settings → Pages → Source → GitHub Actions** no repositório do GitHub.
 
 > **Importante:** abrir o `index.html` com duplo clique (`file://`) **não funciona** — o navegador bloqueia o `fetch()` do xlsx. Sirva via Pages ou um servidor local (`python -m http.server`).
 
