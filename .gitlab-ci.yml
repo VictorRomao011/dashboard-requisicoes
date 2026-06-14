@@ -2,7 +2,7 @@ pages:
   stage: deploy
   script:
     - mkdir -p public
-    - cp index.html dados.xlsx public/
+    - cp index.html dados.xlsx bg-energy.png bg-energy-faint.png siemens-energy-white.png public/
   artifacts:
     paths:
       - public
